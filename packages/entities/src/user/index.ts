@@ -1,5 +1,8 @@
 import { observable, action } from 'mobx';
-export class UserStore {
+/**
+ * 用户实体
+ */
+export class EntitiesUserStore {
     constructor() {
 
     }
@@ -11,4 +14,4 @@ export class UserStore {
         console.log("TCL: UserStore -> onUpdate -> name", name)
     }
 }
-export default new UserStore();
+// export default new EntitiesUserStore();

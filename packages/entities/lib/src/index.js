@@ -1,5 +1,7 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var user_1 = require("./user");
-exports.User = user_1.default;
+__export(require("./user"));
 //# sourceMappingURL=index.js.map

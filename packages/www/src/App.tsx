@@ -1,9 +1,8 @@
-import React from 'react';
-import { User } from '@leng/entities';
 import { observer } from 'mobx-react';
-
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import logo from './logo.svg';
+import User from './Store';
 @observer
 export default class App extends React.Component<any, any> {
   public render() {
@@ -11,7 +10,7 @@ export default class App extends React.Component<any, any> {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1>名字：{User.name}</h1>
+          <h1>{User.type}名字：{User.name}</h1>
           <button onClick={() => {
             console.log("测试")
             User.onUpdate(`名字-${Math.random()}`)

@@ -7,6 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
+    "dev:mobile": "cd  packages/mobile && npm run dev:weapp",
+    "dev:entities": "cd packages/entities && npm run dev",
+    "dev:web": "cd packages/web && npm run serve",
+    "dev:www": "cd packages/www && npm start",
     "bootstrap": "lerna bootstrap",
     "clean": "rimraf package-lock.json packages/*/package-lock.json yarn.lock packages/*/yarn.lock  && lerna clean",
     "test": "echo \"Error: no test specified\" && exit 1"

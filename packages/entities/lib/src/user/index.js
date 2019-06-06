@@ -7,22 +7,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mobx_1 = require("mobx");
-var UserStore = /** @class */ (function () {
-    function UserStore() {
+/**
+ * 用户实体
+ */
+var EntitiesUserStore = /** @class */ (function () {
+    function EntitiesUserStore() {
         this.name = "名字123";
     }
-    UserStore.prototype.onUpdate = function (name) {
+    EntitiesUserStore.prototype.onUpdate = function (name) {
         this.name = name;
         console.log("TCL: UserStore -> onUpdate -> name", name);
     };
     __decorate([
         mobx_1.observable
-    ], UserStore.prototype, "name", void 0);
+    ], EntitiesUserStore.prototype, "name", void 0);
     __decorate([
         mobx_1.action
-    ], UserStore.prototype, "onUpdate", null);
-    return UserStore;
+    ], EntitiesUserStore.prototype, "onUpdate", null);
+    return EntitiesUserStore;
 }());
-exports.UserStore = UserStore;
-exports.default = new UserStore();
+exports.EntitiesUserStore = EntitiesUserStore;
+// export default new EntitiesUserStore();
 //# sourceMappingURL=index.js.map

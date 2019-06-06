@@ -1,10 +1,11 @@
-import { ComponentType } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text,Image } from '@tarojs/components'
-import { observer, inject } from '@tarojs/mobx'
-import counterStore from '../../store/counter'
-import img from '../../img'
-import './index.less'
+import { Button, Image, View } from '@tarojs/components';
+import { observer } from '@tarojs/mobx';
+import Taro, { Component, Config } from '@tarojs/taro';
+import User from '../../store/user';
+import { ComponentType } from 'react';
+import img from '../../img';
+import counterStore from '../../store/counter';
+import './index.less';
 @observer
 class Index extends Component {
 
@@ -47,17 +48,22 @@ class Index extends Component {
   goTo = () => {
     Taro.navigateTo({ url: "/pages/test/index" })
   }
+  onUpdate() {
+    User.onUpdate(`名字${Math.random()}`)
+  }
   render() {
     const { counter, time } = counterStore
     return (
       <View className='index'>
+        <View>{User.type}名字：{User.name}</View>
+        <Button onClick={this.onUpdate}>更改</Button>
         <Button onClick={this.increment}>+</Button>
         <Button onClick={this.decrement}>-</Button>
         <Button onClick={this.incrementAsync}>Add Async</Button>
         <View>{counter}</View>
         <View>{time}</View>
         <Button onClick={this.goTo}>跳转</Button>
-        <Image src={img.wx}/>
+        <Image src={img.wx} />
       </View>
     )
   }
