@@ -3,11 +3,37 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "keywords": [],
   "author": "lengyingxin <lengyingxin8966@gmail.com> (https://github.com/LengYXin)",
   "license": "ISC",
   "description": "",
-  "gitHead": "9f986a0907b2f3e0cf982b2175ee554e106dda8e"
+  "gitHead": "9f986a0907b2f3e0cf982b2175ee554e106dda8e",
+  "dependencies": {
+    "@types/jest": "24.0.12",
+    "@types/react": "16.8.17",
+    "@types/react-dom": "16.8.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
