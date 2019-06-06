@@ -1,7 +1,8 @@
 import React from 'react';
+import Entities from '@leng/entities';
 import logo from './logo.svg';
 import './App.css';
-
+console.log(Entities)
 const App: React.FC = () => {
   return (
     <div className="App">
