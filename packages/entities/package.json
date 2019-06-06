@@ -1,8 +1,8 @@
 {
   "name": "@leng/entities",
   "version": "0.0.1",
-  "main": "index.js",
-  "typings":"lib/src/index.d.ts",
+  "main": "lib/index.js",
+  "typings":"lib/index.d.ts",
   "files": [
     "src",
     "lib"

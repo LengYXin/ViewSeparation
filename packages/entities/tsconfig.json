@@ -16,7 +16,7 @@
     "strictNullChecks": true,
     "sourceMap": true,
     "baseUrl": "src",
-    "rootDir": "."
+    "rootDir": "src"
   },
   "include": ["src"],
   "exclude": [
