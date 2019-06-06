@@ -1,0 +1,39 @@
+{
+  "name": "leng",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LengYXin/ViewSeparation.git"
+  },
+  "author": "lengyingxin <lengyingxin8966@gmail.com> (https://github.com/LengYXin)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LengYXin/ViewSeparation/issues"
+  },
+  "homepage": "https://github.com/LengYXin/ViewSeparation#readme",
+  "description": "",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "lodash-decorators": "^6.0.1",
+    "mobx": "4.10.0",
+    "mobx-persist": "^0.4.1",
+    "moment": "^2.24.0",
+    "nprogress": "^0.2.0",
+    "rxjs": "^6.5.2",
+    "viewerjs": "^1.3.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.133",
+    "@types/node": "^12.0.5",
+    "lerna": "^3.14.1",
+    "typescript": "^3.5.1"
+  }
+}

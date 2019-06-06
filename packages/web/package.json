@@ -1,0 +1,12 @@
+{
+  "name": "@leng/web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "lengyingxin <lengyingxin8966@gmail.com> (https://github.com/LengYXin)",
+  "license": "ISC",
+  "description": ""
+}
