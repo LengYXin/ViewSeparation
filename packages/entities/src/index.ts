@@ -4,4 +4,7 @@ import { configure } from 'mobx';
  * 启用严格模式
  */
 configure({ enforceActions: "observed" });
-export * from "./user";
+export * from "./entities/user";
+export * from "./utils/helps";
+export * from "./utils/regulars";
+
