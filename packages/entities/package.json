@@ -1,13 +1,14 @@
 {
   "name": "@leng/entities",
   "version": "0.0.1",
-  "main": "lib/src/index.js",
+  "main": "index.js",
   "typings":"lib/src/index.d.ts",
   "files": [
     "src",
     "lib"
   ],
   "scripts": {
+    "build": "tsc",
     "dev": "tsc -w"
   },
   "keywords": [],

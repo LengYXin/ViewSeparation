@@ -1,5 +1,5 @@
 const config = {
-  projectName: 'sam-wx',
+  projectName: '@leng/mobile',
   date: '2019-6-5',
   designWidth: 750,
   deviceRatio: {

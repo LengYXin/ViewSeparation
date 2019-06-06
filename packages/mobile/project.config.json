@@ -1,6 +1,6 @@
 {
   "miniprogramRoot": "./dist",
-  "projectname": "sam-wx",
+  "projectname": "@leng/mobile",
   "description": "",
   "appid": "touristappid",
   "setting": {
