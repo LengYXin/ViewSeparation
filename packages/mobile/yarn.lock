@@ -2219,9 +2219,9 @@ camelcase@^4.1.0:
   integrity sha1-1UVjW+HjPFQmScaRc+Xeas+uNN0=
 
 caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000859, caniuse-lite@^1.0.30000864:
-  version "1.0.30000973"
-  resolved "https://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000973.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcaniuse-lite%2Fdownload%2Fcaniuse-lite-1.0.30000973.tgz#2f8e8e54f9e6c5b7a631c9e69bfa1093d8cfd360"
-  integrity sha1-L46OVPnmxbemMcnmm/oQk9jP02A=
+  version "1.0.30000974"
+  resolved "https://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000974.tgz#b7afe14ee004e97ce6dc73e3f878290a12928ad8"
+  integrity sha1-t6/hTuAE6Xzm3HPj+HgpChKSitg=
 
 capture-stack-trace@^1.0.0:
   version "1.0.1"
@@ -8981,7 +8981,7 @@ superagent-retry@^0.6.0:
 
 superagent@^3.5.0, superagent@^3.8.2, superagent@^3.8.3:
   version "3.8.3"
-  resolved "https://registry.npm.taobao.org/superagent/download/superagent-3.8.3.tgz#460ea0dbdb7d5b11bc4f78deba565f86a178e128"
+  resolved "https://registry.npm.taobao.org/superagent/download/superagent-3.8.3.tgz?cache=0&sync_timestamp=1559801732798&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fsuperagent%2Fdownload%2Fsuperagent-3.8.3.tgz#460ea0dbdb7d5b11bc4f78deba565f86a178e128"
   integrity sha1-Rg6g29t9WxG8T3jeulZfhqF44Sg=
   dependencies:
     component-emitter "^1.2.0"

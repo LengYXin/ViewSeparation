@@ -2362,9 +2362,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000939, caniuse-lite@^1.0.30000955, caniuse-lite@^1.0.30000971:
-  version "1.0.30000973"
-  resolved "https://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000973.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcaniuse-lite%2Fdownload%2Fcaniuse-lite-1.0.30000973.tgz#2f8e8e54f9e6c5b7a631c9e69bfa1093d8cfd360"
-  integrity sha1-L46OVPnmxbemMcnmm/oQk9jP02A=
+  version "1.0.30000974"
+  resolved "https://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000974.tgz#b7afe14ee004e97ce6dc73e3f878290a12928ad8"
+  integrity sha1-t6/hTuAE6Xzm3HPj+HgpChKSitg=
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -6216,6 +6216,18 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@
   dependencies:
     minimist "0.0.8"
 
+mobx-react-lite@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.npm.taobao.org/mobx-react-lite/download/mobx-react-lite-1.4.0.tgz#193beb5fdddf17ae61542f65ff951d84db402351"
+  integrity sha1-GTvrX93fF65hVC9l/5UdhNtAI1E=
+
+mobx-react@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.npm.taobao.org/mobx-react/download/mobx-react-6.0.3.tgz#8a6492ada0bc89988150cc60e718c99be3bbb8dd"
+  integrity sha1-imSSraC8iZiBUMxg5xjJm+O7uN0=
+  dependencies:
+    mobx-react-lite "1.4.0"
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/move-concurrently/download/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -6968,7 +6980,7 @@ pn@^1.1.0:
 
 pnp-webpack-plugin@1.2.1:
   version "1.2.1"
-  resolved "https://registry.npm.taobao.org/pnp-webpack-plugin/download/pnp-webpack-plugin-1.2.1.tgz#cd9d698df2a6fcf7255093c1c9511adf65b9421b"
+  resolved "https://registry.npm.taobao.org/pnp-webpack-plugin/download/pnp-webpack-plugin-1.2.1.tgz?cache=0&sync_timestamp=1559802934675&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpnp-webpack-plugin%2Fdownload%2Fpnp-webpack-plugin-1.2.1.tgz#cd9d698df2a6fcf7255093c1c9511adf65b9421b"
   integrity sha1-zZ1pjfKm/PclUJPByVEa32W5Qhs=
   dependencies:
     ts-pnp "^1.0.0"

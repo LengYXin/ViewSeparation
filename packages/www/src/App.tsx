@@ -1,27 +1,25 @@
 import React from 'react';
-import Entities from '@leng/entities';
+import { User } from '@leng/entities';
+import { observer } from 'mobx-react';
+
 import logo from './logo.svg';
 import './App.css';
-console.log(Entities)
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+@observer
+export default class App extends React.Component<any, any> {
+  public render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1>名字：{User.name}</h1>
+          <button onClick={() => {
+            console.log("测试")
+            User.onUpdate(`名字-${Math.random()}`)
+          }}>更改</button>
+        </header>
+
+      </div>
+    );
+  }
 }
 
-export default App;
