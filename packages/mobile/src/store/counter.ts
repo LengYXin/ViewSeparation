@@ -1,21 +1,24 @@
-import { observable } from 'mobx'
+import { observable, action } from 'mobx'
 // mobx 没有启用严格模式
 class Store {
   constructor() {
     setInterval(() => {
-      this.time = DateFormat(Date.now(), "yyyy-MM-dd hh:mm:ss");
+      this.updateTime()
     }, 1000)
   }
   @observable
   counter = 0;
   @observable
   time = DateFormat(Date.now(), "yyyy-MM-dd hh:mm:ss");
-  counterStore() {
-    this.counter++
+  @action
+  updateTime() {
+    this.time = DateFormat(Date.now(), "yyyy-MM-dd hh:mm:ss");
   }
+  @action
   increment() {
     this.counter++
   }
+  @action
   decrement() {
     this.counter--
   }
@@ -26,7 +29,7 @@ class Store {
         res(true)
       }, 1000)
     })
-    this.counter++
+    this.increment()
   }
 }
 function DateFormat(date, fmt) {
