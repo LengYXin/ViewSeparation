@@ -1,3 +1,7 @@
 import { configure } from 'mobx';
+/**
+ * https://cn.mobx.js.org/refguide/api.html
+ * 启用严格模式
+ */
 configure({ enforceActions: "observed" });
 export * from "./user";

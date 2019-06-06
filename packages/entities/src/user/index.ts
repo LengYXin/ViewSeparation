@@ -4,7 +4,7 @@ import { observable, action } from 'mobx';
  */
 export class EntitiesUserStore {
     constructor() {
-
+        
     }
     @observable
     name = "名字123";
