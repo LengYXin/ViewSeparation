@@ -13,7 +13,8 @@
     "dev:www": "cd packages/www && npm start",
     "init": "yarn install && npm run bootstrap",
     "bootstrap": "lerna bootstrap && cd packages/entities && npm run build ",
-    "clean": "rimraf node_modules package-lock.json packages/*/package-lock.json yarn.lock packages/*/yarn.lock  && lerna clean",
+    "clean": "lerna clean",
+    "clean-all": "rimraf node_modules package-lock.json packages/*/package-lock.json yarn.lock packages/*/yarn.lock  && npm run clean",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
