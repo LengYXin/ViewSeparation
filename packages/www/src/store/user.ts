@@ -1,8 +1,8 @@
 import { EntitiesUserStore } from '@leng/entities';
-class UserStore extends EntitiesUserStore {
+class Store extends EntitiesUserStore {
     // constructor() {
     //     super()
     // }
     type = "React";
 }
-export default new UserStore();
+export default new Store();
