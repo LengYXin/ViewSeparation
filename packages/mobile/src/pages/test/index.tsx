@@ -2,7 +2,6 @@ import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Button, Text } from '@tarojs/components'
 import { observer, inject } from '@tarojs/mobx'
-import counterStore from '../../store/counter'
 import './index.less'
 @observer
 class Index extends Component {
@@ -32,20 +31,8 @@ class Index extends Component {
 
   componentDidHide() { }
 
-  increment = () => {
-    counterStore.increment()
-  }
-
-  decrement = () => {
-    counterStore.decrement()
-  }
-
-  incrementAsync = () => {
-    counterStore.incrementAsync()
-  }
 
   render() {
-    const { counter, time } = counterStore
     return (
       <View className='index'>
         测试

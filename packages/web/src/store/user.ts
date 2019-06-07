@@ -1,8 +1,8 @@
 import { EntitiesUserStore } from '@leng/entities';
-class UserStore extends EntitiesUserStore {
+class Store extends EntitiesUserStore {
     constructor() {
         super()
     }
     type = "Vue";
 }
-export default new UserStore();
+export default new Store();
