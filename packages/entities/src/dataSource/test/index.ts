@@ -16,8 +16,9 @@ export class testDataSource {
                 //     accept: "*/*",
                 //     "Content-Type": "application/json",
                 // }
-            }).toPromise()
-            console.log("TCL: EntitiesTimeStore -> onTest -> data", data)
+            }).toPromise();
+            // console.log("TCL: EntitiesTimeStore -> onTest -> data", data)
+            return data;
         } catch (error) {
             console.error(error)
         }
