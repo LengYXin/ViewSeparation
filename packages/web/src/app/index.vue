@@ -9,20 +9,21 @@
 </template>
 
 <style lang="scss">
+@import "../style/themes/index.scss";
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: $font-family;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: $blue-6;
 }
 #nav {
   padding: 30px;
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: $purple-6;
     &.router-link-exact-active {
-      color: #42b983;
+      color: $red-6;
     }
   }
 }

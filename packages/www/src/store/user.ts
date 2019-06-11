@@ -1,6 +1,6 @@
 import { EntitiesUserStore } from '@leng/entities';
 class Store extends EntitiesUserStore {
-    // constructor() {
+    // constructor(public a) {
     //     super()
     // }
     type = "React";

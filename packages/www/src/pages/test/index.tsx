@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react';
 import React from 'react';
-import './App.css';
-import logo from './logo.svg';
-import User from './store/user';
-import Time from './store/time';
+import Logo from 'components/logo';
+import './style.scss';
+import User from 'store/user';
+import Time from 'store/time';
 // @observer
 export default class App extends React.Component<any, any> {
 
@@ -12,7 +12,7 @@ export default class App extends React.Component<any, any> {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <Logo/>
           <AppTime />
           <AppName />
           <button onClick={() => {

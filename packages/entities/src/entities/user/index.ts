@@ -4,7 +4,13 @@ import { observable, action } from 'mobx';
  */
 export class EntitiesUserStore {
     constructor() {
-        
+
+    }
+    @observable
+    info = {
+        name: "",
+        age: 0,
+        sex: true,
     }
     @observable
     name = "名字123";

@@ -1,3 +1,4 @@
+@import "style/themes/index.scss";
 .App {
   text-align: center;
 }
@@ -16,11 +17,11 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: $purple-6;
 }
 
 .App-link {
-  color: #61dafb;
+  color: $purple-6;
 }
 
 @keyframes App-logo-spin {
