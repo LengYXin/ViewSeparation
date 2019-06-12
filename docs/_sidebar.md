@@ -8,5 +8,6 @@
     * [mobile 小程序端](mobile.md)
     * [web vue 程序](vue.md)
     * [www react 程序](react.md)
+* [技术栈](技术栈.md)
 * [使用须知](使用须知.md)
 * [优缺点介绍](优缺点介绍.md)
