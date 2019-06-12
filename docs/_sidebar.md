@@ -3,6 +3,7 @@
 * [首页](/)
     <!-- * [目录结构](目录.md) -->
 * [目录结构](目录.md)
+    * [项目 目录](src.md)
 * [entities （实体模型状态管理）](entities.md)
     * [mobile 小程序端](mobile.md)
     * [web vue 程序](vue.md)
