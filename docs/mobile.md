@@ -44,6 +44,8 @@ export default new UserStore();
 ```
 
 ## mobile 使用
+> packages/mobile/src/pages/index/index.tsx
+
 ``` jsx
 import { Button, Image, View } from '@tarojs/components';
 import { observer } from '@tarojs/mobx';
