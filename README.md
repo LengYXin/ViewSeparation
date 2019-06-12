@@ -1,2 +1,1 @@
-# 文档地址
-> [链接](https://lengyxin.github.io/ViewSeparation/#/)
+#  [文档地址](https://lengyxin.github.io/ViewSeparation/#/)
