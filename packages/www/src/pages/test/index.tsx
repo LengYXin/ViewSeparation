@@ -21,6 +21,7 @@ export default class App extends React.Component<any, any> {
             User.onUpdate(`名字-${Math.random()}`)
           }}>更改</button>
           <Link to="/page" >跳转</Link>
+          <Link to="/page/1" >跳转（参数）</Link>
         </header>
       </div>
     );
