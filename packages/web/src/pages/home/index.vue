@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img alt="Vue logo" src="@/assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <h1>时间：{{Time.currentTime}}</h1>
     <h1>{{User.type}}{{User.name}}</h1>
@@ -11,8 +11,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
-import User from "../store/user";
-import Time from "../store/time";
+import User from "../../store/user";
+import Time from "../../store/time";
 import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 @Observer
 @Component({
