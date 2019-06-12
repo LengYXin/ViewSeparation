@@ -31,6 +31,9 @@
 > packages>entities 项目编译 后 引入的项目不需要 手动更新依赖。lerna 会自动更新<br/>
 > 
 
+# 优缺点介绍
+![案例](https://github.com/LengYXin/ViewSeparation/blob/master/docs/images/youquedian.jpg)
+
 # 测试位置 （每个项目中的 这个位置）
 
 ![案例](https://github.com/LengYXin/ViewSeparation/blob/master/docs/images/WX20190606-181711.png)
