@@ -1,6 +1,8 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 import Logo from 'components/logo';
+import { Link } from 'react-router-dom';
+
 import './style.scss';
 import User from 'store/user';
 import Time from 'store/time';
@@ -12,12 +14,13 @@ export default class App extends React.Component<any, any> {
     return (
       <div className="App">
         <header className="App-header">
-          <Logo/>
+          <Logo />
           <AppTime />
           <AppName />
           <button onClick={() => {
             User.onUpdate(`名字-${Math.random()}`)
           }}>更改</button>
+          <Link to="/page" >跳转</Link>
         </header>
       </div>
     );
@@ -64,7 +67,7 @@ class AppName extends React.Component<any, any> {
 }
 
 @observer
-class AppTime extends React.Component<any, any> {
+export class AppTime extends React.Component<any, any> {
   render() {
     console.log('render AppTime')
     return (
