@@ -5,46 +5,23 @@
  * @modify date 2018-09-12 18:52:37
  * @desc [description]
 */
-import  lodash from 'lodash';
+import lodash from 'lodash';
 // import NProgress from 'nprogress';
 import { Observable, of, TimeoutError } from "rxjs";
 import { ajax, AjaxError, AjaxResponse, AjaxRequest } from "rxjs/ajax";
 import { catchError, filter, map, timeout } from "rxjs/operators";
-/** 缓存 http 请求 */
-const CacheHttp = new Map<string, Promise<any>>();
+/** 缓存 Request 请求 */
+const CacheRequest = new Map<string, Observable<any>>();
 /** 缓存数据 */
 const Cache = new Map<string, any>();
-// 每30秒清理一次缓存
-// interval(30000).subscribe(obs => {
-//     CacheHttp.clear();
-//     Cache.clear();
-// })
 export class Request {
     /**
      * 
-     * @param target 替换默认地址前缀
-     * @param newMap 替换默认过滤函数
+     * @param target 
      */
-    constructor(target?, public newMap?) {
-        if (typeof target === "string") {
-            this.target = target;
-        }
-        this.getHeaders();
-    }
-    /** 
-     * 请求路径前缀
-     */
-    target = "/"//GlobalConfig.target
-    /**
-     * 获取 认证 token请求头
-     */
-    getHeaders() {
-        return {
-            // ...GlobalConfig.headers,
-            // token: GlobalConfig.token.get()
-        }
-    }
-
+    constructor(
+        public target = "/"
+    ) { }
     /**
      * 请求超时设置
      */
@@ -74,11 +51,6 @@ export class Request {
                         // 无 响应 数据
                         if (lodash.isNil(ajax.response)) {
                             console.warn("响应体为 NULL", ajax)
-                            // GlobalConfig.development && notification.warn({
-                            //     message: "响应体为 NULL ",
-                            //     duration: 5,
-                            //     description: `url:${lodash.get(ajax, "request.url")}`
-                            // })
                             return false
                         }
                         return true
@@ -87,61 +59,21 @@ export class Request {
                     if (ajax instanceof AjaxError) {
                         const { response } = ajax;
                         // 返回 业务处理错误
-                        if (response && lodash.includes(this.catchStatus, ajax.status)) {
-                            if (response.Message && response.Message.length > 0) {
-                                // lodash.compact(response.Message).map(message => notification.error({
-                                //     message
-                                // }))
-                            }
-                            if (response.errors) {
-                                // notification.error({
-                                //     key: ajax.request.url,
-                                //     message: response.traceId,
-                                //     duration: 5,
-                                //     description: response.title,
-                                // });
-                            }
+                        if (response && lodash.some(this.catchStatus, ajax.status)) {
                             sub.error(response)
-                            return false
+                        } else {
+                            sub.error(ajax.message)
                         }
-                        sub.error({})
-                        // notification.error({
-                        //     key: ajax.request.url,
-                        //     message: ajax.status,
-                        //     duration: 5,
-                        //     description: `${ajax.request.method}: ${ajax.request.url}`,
-                        // });
                         return false
                     }
                     if (ajax instanceof TimeoutError) {
-                        sub.error({})
-                        // notification.error({
-                        //     key: ajax.name,
-                        //     message: ajax.message,
-                        //     duration: 5,
-                        // });
+                        sub.error(ajax.message)
                         return false
                     }
-                    return true
+                    return false
                 }),
                 // 数据过滤
-                map((res: AjaxResponse) => {
-                    // 使用传入得 过滤函数
-                    if (this.newMap && typeof this.newMap == "function") {
-                        return this.newMap(res);
-                    }
-                    switch (res.status) {
-                        case 200:
-                            return res.response
-                        default:
-                            // notification.warn({
-                            //     message: res.status,
-                            //     duration: 5,
-                            //     description: `请配置 状态 ${res.status} 处理逻辑`,
-                            // });
-                            break;
-                    }
-                })
+                map(this.responseMap.bind(this))
             ).subscribe(obs => {
                 sub.next(obs)
                 sub.complete()
@@ -149,52 +81,56 @@ export class Request {
         })
     }
     /**
-     * url 参数 注入
-     * @param url url
-     * @param body body
-     * @param emptyBody 清空 body 
+     * 请求 map 转换
+     * @param res 
      */
-    static parameterTemplate(url, body, emptyBody = false) {
-        if (lodash.isObject(body) && /{([\s\S]+?)}/g.test(url)) {
-            if (typeof body == "object") {
+    responseMap(res: AjaxResponse) {
+        switch (res.status) {
+            case 200:
+                return res.response
+            default:
+                return {}
+                break;
+        }
+    }
+    /**
+     * 返回请求头
+     */
+    getHeaders() {
+        return {}
+    }
+    /**
+     * url 参数 注入
+     * @param url 
+     * @param body 
+     */
+    static parameterTemplate(url, body) {
+        try {
+            if (lodash.isObject(body) && /{([\s\S]+?)}/g.test(url)) {
                 url = lodash.template(url, { interpolate: /{([\s\S]+?)}/g })(body);
             }
-            // 清空body
-            emptyBody && (body = {});
-        }
-        return {
-            url,
-            body
-        }
+        } catch (error) { }
+        return url
     }
     /**
      *  请求数据 缓存数据
      * @param params 
      */
-    async cache(params: {
-        url: string,
-        body?: { [key: string]: any } | string,
-        headers?: Object
-        method?: "get" | "post"
-    }) {
-        params = { url: "", body: {}, method: "get", ...params };
-        const key = JSON.stringify({ url: params.url, body: params.body })
+    async cache(urlOrRequest: string | AjaxRequest) {
+        const key = lodash.isString(urlOrRequest) ? urlOrRequest : `${urlOrRequest.url}_${JSON.stringify(urlOrRequest.body)}`
         if (Cache.has(key)) {
             return Cache.get(key);
         }
-        let promise: Promise<any>// = Http.get(this.address + parmas.address, parmas.params).toPromise();
-        if (CacheHttp.has(key)) {
-            promise = CacheHttp.get(key) as Promise<any>;
+        let ajaxObservable: Observable<any>;
+        // 读缓存
+        if (CacheRequest.has(key)) {
+            ajaxObservable = CacheRequest.get(key) as Observable<any>;
         } else {
-            // if (params.method == "get") {
-            //     promise = this.get(params.url, params.body, params.headers).toPromise();
-            // } else {
-            //     promise = this.post(params.url, params.body, params.headers).toPromise();
-            // }
-            promise = this.ajax(params).toPromise();
-            CacheHttp.set(key, promise);
+            // 设缓存
+            ajaxObservable = this.ajax(urlOrRequest);
+            CacheRequest.set(key, ajaxObservable);
         }
-        const data = await promise || [];
+        const data = await ajaxObservable.toPromise();
         Cache.set(key, data);
         return data;
     }
@@ -204,97 +140,23 @@ export class Request {
      */
     ajax(urlOrRequest: string | AjaxRequest) {
         if (lodash.isString(urlOrRequest)) {
-            return this.AjaxObservable(ajax(this.get({ url: urlOrRequest })))
+            return this.AjaxObservable(ajax(urlOrRequest))
         }
         urlOrRequest.headers = { ...this.getHeaders(), ...urlOrRequest.headers };
-        switch (lodash.toLower(urlOrRequest.method)) {
-            case 'post':
-                urlOrRequest = this.post(urlOrRequest)
+        const url = Request.parameterTemplate(urlOrRequest.url, urlOrRequest.body)
+        // GET, POST, PUT, PATCH, DELETE
+        switch (lodash.toUpper(urlOrRequest.method)) {
+            case 'POST':
+            case 'PUT':
+                urlOrRequest.body = Request.formatBody(urlOrRequest.body, "body", urlOrRequest.headers);
+                urlOrRequest.url = Request.compatibleUrl(this.target, url);
                 break;
-            case 'put':
-                urlOrRequest = this.put(urlOrRequest)
-                break;
-            case 'delete':
-                urlOrRequest = this.delete(urlOrRequest)
-                break;
-            default://get
-                urlOrRequest = this.get(urlOrRequest)
+            default:
+                urlOrRequest.url = Request.compatibleUrl(this.target, url, Request.formatBody(urlOrRequest.body));
                 break;
         }
         return this.AjaxObservable(ajax(urlOrRequest))
     }
-    /**
-     * 
-     * @param urlOrRequest 
-     */
-    private get(urlOrRequest: AjaxRequest): AjaxRequest {
-        const newParams = Request.parameterTemplate(urlOrRequest.url, urlOrRequest.body, true);
-        urlOrRequest.body = Request.formatBody(newParams.body);
-        urlOrRequest.url = Request.compatibleUrl(this.target, newParams.url, urlOrRequest.body);
-        return urlOrRequest
-    }
-    /**
-     * post
-     * @param url 
-     * @param body 
-     * @param headers 
-     */
-    private post(urlOrRequest: AjaxRequest): AjaxRequest {
-        const newParams = Request.parameterTemplate(urlOrRequest.url, urlOrRequest.body);
-        urlOrRequest.body = Request.formatBody(newParams.body, "body", urlOrRequest.headers);
-        urlOrRequest.url = Request.compatibleUrl(this.target, newParams.url);
-        return urlOrRequest
-    }
-    /**
-     * put
-     * @param url 
-     * @param body 
-     * @param headers 
-     */
-    private put(urlOrRequest: AjaxRequest): AjaxRequest {
-        const newParams = Request.parameterTemplate(urlOrRequest.url, urlOrRequest.body);
-        urlOrRequest.body = Request.formatBody(newParams.body, "body", urlOrRequest.headers);
-        urlOrRequest.url = Request.compatibleUrl(this.target, newParams.url);
-        return urlOrRequest
-    }
-    /**
-     * delete
-     * @param url 
-     * @param body 
-     * @param headers 
-     */
-    delete(urlOrRequest: AjaxRequest): AjaxRequest {
-        const newParams = Request.parameterTemplate(urlOrRequest.url, urlOrRequest.body, true);
-        urlOrRequest.body = Request.formatBody(newParams.body);
-        urlOrRequest.url = Request.compatibleUrl(this.target, newParams.url, urlOrRequest.body);
-        return urlOrRequest
-    }
-    /** jsonp 回调 计数 */
-    private jsonpCounter = 0;
-    /**
-     * jsonP
-     */
-    jsonp(url, body?: { [key: string]: any } | string, callbackKey = 'callback') {
-        this.getHeaders();
-        body = Request.formatBody(body);
-        url = Request.compatibleUrl(this.target, url, `${body || '?time=' + new Date().getTime()}&${callbackKey}=`);
-        return new Observable(observer => {
-            this.jsonpCounter++;
-            const key = '_jsonp_callback_' + this.jsonpCounter;
-            const script = document.createElement('script');
-            script.src = url + key;
-            script.onerror = (err) => observer.error(err);
-            document.body.appendChild(script);
-            window[key] = (response) => {
-                // clean up
-                script.parentNode && script.parentNode.removeChild(script);
-                delete window[key];
-                // push response downstream
-                observer.next(response);
-                observer.complete();
-            };
-        })
-    };
     /**
      * url 兼容处理 
      * @param address 前缀
