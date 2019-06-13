@@ -32,20 +32,20 @@ class App extends Component {
         {
           pagePath: "pages/index/index",
           text: "首页",
-          iconPath: "img/home.png",
-          selectedIconPath: "img/home-s.png"
+          iconPath: "assets/img/home.png",
+          selectedIconPath: "assets/img/home-s.png"
         },
         {
           pagePath: "pages/home/index",
           text: "美季MEIJI",
-          iconPath: "img/sale.png",
-          selectedIconPath: "img/sale-s.png"
+          iconPath: "assets/img/sale.png",
+          selectedIconPath: "assets/img/sale-s.png"
         },
         {
           pagePath: "pages/user/index",
           text: "我的",
-          iconPath: "img/user.png",
-          selectedIconPath: "img/user-s.png"
+          iconPath: "assets/img/user.png",
+          selectedIconPath: "assets/img/user-s.png"
         }
       ]
     },

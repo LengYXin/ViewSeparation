@@ -1,4 +1,4 @@
-import wx from './img/wx.png';
+import wx from './assets/img/wx.png';
 export default {
     wx
 };
