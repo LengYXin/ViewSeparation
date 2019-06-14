@@ -25,11 +25,11 @@ export class Request {
     /**
      * 请求超时设置
      */
-    protected timeout = 10000;
+    timeout = 10000;
     /**
      * 抛出 状态 
      */
-    protected catchStatus = [400]
+    catchStatus = [400]
     /**
      * ajax Observable 管道
      * @param Observable 
@@ -140,21 +140,25 @@ export class Request {
      */
     ajax(urlOrRequest: string | AjaxRequest) {
         if (lodash.isString(urlOrRequest)) {
-            return this.AjaxObservable(ajax(urlOrRequest))
+            const ajaxRequest: AjaxRequest = {
+                url: urlOrRequest
+            }
+            urlOrRequest = ajaxRequest;
+        } else {
+            const url = Request.parameterTemplate(urlOrRequest.url, urlOrRequest.body)
+            // GET, POST, PUT, PATCH, DELETE
+            switch (lodash.toUpper(urlOrRequest.method)) {
+                case 'POST':
+                case 'PUT':
+                    urlOrRequest.body = Request.formatBody(urlOrRequest.body, "body", urlOrRequest.headers);
+                    urlOrRequest.url = Request.compatibleUrl(this.target, url);
+                    break;
+                default:
+                    urlOrRequest.url = Request.compatibleUrl(this.target, url, Request.formatBody(urlOrRequest.body));
+                    break;
+            }
         }
         urlOrRequest.headers = { ...this.getHeaders(), ...urlOrRequest.headers };
-        const url = Request.parameterTemplate(urlOrRequest.url, urlOrRequest.body)
-        // GET, POST, PUT, PATCH, DELETE
-        switch (lodash.toUpper(urlOrRequest.method)) {
-            case 'POST':
-            case 'PUT':
-                urlOrRequest.body = Request.formatBody(urlOrRequest.body, "body", urlOrRequest.headers);
-                urlOrRequest.url = Request.compatibleUrl(this.target, url);
-                break;
-            default:
-                urlOrRequest.url = Request.compatibleUrl(this.target, url, Request.formatBody(urlOrRequest.body));
-                break;
-        }
         return this.AjaxObservable(ajax(urlOrRequest))
     }
     /**
