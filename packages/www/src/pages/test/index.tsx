@@ -1,14 +1,16 @@
+import Logo from 'components/logo';
 import { observer } from 'mobx-react';
 import React from 'react';
-import Logo from 'components/logo';
 import { Link } from 'react-router-dom';
-
-import './style.scss';
-import User from 'store/user';
 import Time from 'store/time';
+import User from 'store/user';
+import './style.scss';
+import globalconfig from 'global.config';
 // @observer
 export default class App extends React.Component<any, any> {
-
+  componentDidMount() {
+    console.log("TCL: App -> componentDidMount -> globalconfig", globalconfig)
+  }
   render() {
     console.log('render App')
     return (
