@@ -10,7 +10,7 @@
     "dev:vue": "cd packages/www-vue && npm start",
     "dev:react": "cd packages/www-react && npm start",
     "build:vue": "cd packages/www-vue && npm run build",
-    "build:react": "cd packages/www-react && npm build",
+    "build:react": "cd packages/www-react && npm run build",
     "init": "yarn install && lerna bootstrap",
     "docs": "docsify serve docs",
     "clean": "lerna clean",
