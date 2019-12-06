@@ -6,10 +6,6 @@
       <a-button type="link" @click="Store.onAdd()">Add</a-button>
     </h1>
     <h1>
-      <span>{{ UserStore.name }}</span>
-      <a-button type="link" @click="UserStore.onUpdate()">Update</a-button>
-    </h1>
-    <h1>
       <span>{{ TimeStore.currentTime }}</span>
       <a-button type="link" @click="onToggleTime()">Toggle</a-button>
     </h1>
@@ -34,7 +30,6 @@ class Store {
 @Component
 export default class HelloWorld extends Vue {
   Store = new Store();
-  UserStore = new EntitiesUserStore();
   TimeStore = new EntitiesTimeStore();
   @Prop() private msg!: string;
   mounted() {
