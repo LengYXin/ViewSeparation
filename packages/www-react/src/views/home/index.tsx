@@ -1,7 +1,8 @@
-import { EntitiesTimeStore, EntitiesUserStore } from '@leng/public/src';
-import lodash from 'lodash';
+import { EntitiesUserStore } from '@leng/public/src';
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';
+import Login from './login';
+import UserInfo from './user';
 export interface IAppProps {
     UserStore?: EntitiesUserStore,
 }
@@ -9,14 +10,15 @@ export interface IAppProps {
 @observer
 export default class App extends React.Component<IAppProps> {
     componentDidMount() {
-        console.log("TCL: App -> componentDidMount -> this.props", this.props)
+        console.log("TCL: App -> componentDidMount", this.props)
+    }
+    UNSAFE_componentWillUpdate(){
+        console.log('TCL: App -> componentWillUpdate')
     }
     public render() {
-        return (
-            <div>
-                <h1>{this.props.UserStore.name}</h1>
-                <button onClick={() => this.props.UserStore.onUpdate()}>更改姓名</button>
-            </div>
-        );
+        if (this.props.UserStore.OnlineState) {
+            return <UserInfo />;
+        }
+        return <Login />
     }
 }

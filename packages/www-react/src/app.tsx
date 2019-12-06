@@ -13,7 +13,6 @@ const RootStore = {
 }
 export default class App extends React.Component<any> {
     componentDidMount() {
-        console.log(lodash)
     }
     public render() {
         return (
