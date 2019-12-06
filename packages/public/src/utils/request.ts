@@ -6,7 +6,7 @@
  * @desc [description]
 */
 import lodash from 'lodash';
-// import NProgress from 'nprogress';
+import NProgress from 'nprogress';
 import { Observable, of, TimeoutError } from "rxjs";
 import { ajax, AjaxError, AjaxResponse, AjaxRequest } from "rxjs/ajax";
 import { catchError, filter, map, timeout } from "rxjs/operators";
@@ -259,9 +259,9 @@ export class Request {
      */
     static NProgress(type: 'start' | 'done' = 'start') {
         if (type == "start") {
-            // NProgress.start();
+            NProgress.start();
         } else {
-            // NProgress.done();
+            NProgress.done();
         }
     }
 }
