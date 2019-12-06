@@ -8,7 +8,7 @@ import { Random } from 'mockjs';
 @BindAll()
 export class EntitiesUserStore {
     constructor() {
-
+        console.log('测试', lodash)
     }
     @observable
     name = Random.cname();

@@ -1,6 +1,6 @@
 {
     "npm-scripts.showStartNotification": false,
-    "liveServer.settings.root": "/packages/web/dist",
+    "liveServer.settings.root": "/packages/www-vue/build",
     "liveServer.settings.proxy": {
         "enable": true,
         "baseUri": "/api",
