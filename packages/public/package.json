@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "src/index.ts",
   "module": "src/index.ts",
-  "typings": "lib/index.d.ts",
+  "typings": "src/index.d.ts",
   "files": [
     "src",
     "lib"

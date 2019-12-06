@@ -1,21 +1,19 @@
-import { observable, action } from 'mobx';
+import lodash from 'lodash';
+import { BindAll } from 'lodash-decorators';
+import { action, observable } from 'mobx';
+import { Random } from 'mockjs';
 /**
  * 用户实体
  */
+@BindAll()
 export class EntitiesUserStore {
     constructor() {
 
     }
     @observable
-    info = {
-        name: "",
-        age: 0,
-        sex: true,
-    }
-    @observable
-    name = "名字123";
+    name = Random.cname();
     @action
-    onUpdate(name) {
+    onUpdate(name = Random.cname()) {
         this.name = name;
         console.log("TCL: UserStore -> onUpdate -> name", name)
     }
