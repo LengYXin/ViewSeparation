@@ -1,8 +1,6 @@
+import { action } from 'mobx';
+import { timer } from 'rxjs';
 import Entities from './entities';
-import { action, toJS } from 'mobx';
-import lodash from 'lodash';
-import { timer, TimeInterval } from 'rxjs';
-import { catchError, filter, map, timeout } from "rxjs/operators";
 /**
  * 对象 动作 行为 
  * @export
@@ -19,6 +17,7 @@ export default class EntitiesUserBehavior extends Entities {
     @action
     async  onLogin(UserName, Password) {
         this.Loading = true;
+        // 模拟一个等待 1秒钟
         const res = await timer(1000).toPromise();
         this.onVerifyingLanding(UserName, Password);
     }

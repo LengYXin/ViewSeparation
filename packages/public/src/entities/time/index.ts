@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 /**
  * 时间实体
  */
-@BindAll()
+// @BindAll()
 export class EntitiesTimeStore {
     constructor() {
         this.onSetTime();
@@ -25,6 +25,7 @@ export class EntitiesTimeStore {
      */
     @action
     onSetTime(time = Date.now()) {
+        console.log("TCL: EntitiesTimeStore -> constructor -> obs", time);
         this.currentTime = format(time, "yyyy-MM-dd HH:mm:ss");
         // console.log("TCL: EntitiesTimeStore -> onSetTime -> this.currentTime ", this.currentTime )
     }
@@ -59,9 +60,11 @@ export class EntitiesTimeStore {
         this.onEndTime();
         this.onSetTime();
         this.TimeSubscription = interval(1000).pipe(map(() => Date.now())).subscribe(obs => {
-            // console.log("TCL: EntitiesTimeStore -> constructor -> obs", obs);
             this.onSetTime(obs);
         });
+        // setInterval(()=>{
+        //     this.onSetTime();
+        // },1000)
     }
     /**
      * 结束 计时
