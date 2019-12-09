@@ -44,8 +44,19 @@ class Index extends Component {
   componentDidShow() { }
 
   componentDidHide() { }
-  incrementAsync = () => {
-    this.props.TimeStore.onToggleTime()
+  onToggleTime = () => {
+    const { TimeStore, UserStore } = this.props;
+    let res: Taro.showToast.Param = {
+      title: '开始计时',
+      icon: 'none',
+      duration: 2000
+    }
+    if (TimeStore.onToggleTime()) {
+
+    } else {
+      res.title = "结束计时"
+    }
+    Taro.showToast(res)
   }
 
   render() {
@@ -76,7 +87,7 @@ class Index extends Component {
       <View className='index'>
         <View>
           <Text>当前时间：{currentTime}</Text>
-          <Button onClick={() => { TimeStore.onToggleTime() }}>切换计时</Button>
+          <Button onClick={() => { this.onToggleTime() }}>切换计时</Button>
         </View>
         <Button loading={Loading} onClick={() => { UserStore.onLogin('aaaa', '000000') }}>登陆</Button>
       </View>

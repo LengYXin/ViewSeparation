@@ -1,7 +1,7 @@
 import format from 'date-fns/format/index';
 import { BindAll } from 'lodash-decorators';
 import { action, observable } from 'mobx';
-import { interval, Subscription } from 'rxjs';
+import { interval, Subscription, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 /**
  * 时间实体
@@ -18,6 +18,11 @@ export class EntitiesTimeStore {
     @observable
     currentTime = '';
     /**
+     * 开启计时
+     * @memberof EntitiesTimeStore
+     */
+    startInterval = false;
+    /**
      * 设置当前时间
      *
      * @param {*} [time=Date.now()]
@@ -25,16 +30,14 @@ export class EntitiesTimeStore {
      */
     @action
     onSetTime(time = Date.now()) {
-        console.log("TCL: EntitiesTimeStore -> constructor -> obs", time);
         this.currentTime = format(time, "yyyy-MM-dd HH:mm:ss");
-        // console.log("TCL: EntitiesTimeStore -> onSetTime -> this.currentTime ", this.currentTime )
     }
     /**
      * 计时器
      * @type {(Subscription | undefined)}
      * @memberof EntitiesTimeStore
      */
-    TimeSubscription: Subscription | undefined;
+    // TimeSubscription: Subscription | undefined;
     /**
      * 切换 计时器状态
      *
@@ -42,10 +45,13 @@ export class EntitiesTimeStore {
      * @returns
      * @memberof EntitiesTimeStore
      */
-    onToggleTime(start = !this.TimeSubscription) {
+    onToggleTime(start = !this.startInterval) {
         if (start) {
+            this.startInterval = true;
+            this.onEndTime();
             this.onStartTime();
         } else {
+            this.startInterval = false;
             this.onEndTime();
         }
         return start
@@ -56,12 +62,16 @@ export class EntitiesTimeStore {
      * @private
      * @memberof EntitiesTimeStore
      */
-    private onStartTime() {
-        this.onEndTime();
+    private async onStartTime() {
+        // this.onEndTime();
         this.onSetTime();
-        this.TimeSubscription = interval(1000).pipe(map(() => Date.now())).subscribe(obs => {
-            this.onSetTime(obs);
-        });
+        if (this.startInterval) {
+            await timer(1000).toPromise();
+            this.onStartTime();
+        }
+        // this.TimeSubscription = interval(1000).pipe(map(() => Date.now())).subscribe(obs => {
+        //     this.onSetTime(obs);
+        // });
         // setInterval(()=>{
         //     this.onSetTime();
         // },1000)
@@ -73,7 +83,8 @@ export class EntitiesTimeStore {
      * @memberof EntitiesTimeStore
      */
     private onEndTime() {
-        this.TimeSubscription && this.TimeSubscription.unsubscribe();
-        this.TimeSubscription = undefined;
+        // this.TimeSubscription && this.TimeSubscription.unsubscribe();
+        // this.TimeSubscription = undefined;
+        // this.startInterval = false;
     }
 }
